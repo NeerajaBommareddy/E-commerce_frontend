@@ -1,0 +1,63 @@
+<p>add-product works!</p>
+<div class="container bg-success">
+
+    <h2>Add Category</h2>
+  <div class="row">
+    <div class="col">
+    <form #newProductform="ngForm" (ngSubmit)="onSubmit(newProductform)">
+           
+        <div class="col">
+          <label for="name">Product name</label>
+          <input  type="text" class="form-control" required ngModel  [(ngModel)]="product.name" placeholder="Product Name" name="name" #name="ngModel"  id="name">     
+        </div>
+          
+        <div class="col">
+            <label for="code">Product code</label>
+            <input  type="text" class="form-control" required ngModel minlength="5" [(ngModel)]="product.code" placeholder="Product Code" name="code" #code="ngModel"  id="code">     
+          </div>
+        <div class="col">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" [(ngModel)]="product.description"  placeholder="Description"  name="description" #description="ngModel" id="description">
+        </div>
+        <div class="col">
+            <label for="category_id">Category Id</label>
+            <input type="number" class="form-control" [(ngModel)]="product.category_id"  placeholder="Enter Category_id"  name="category_id" #category_id="ngModel" id="category_id">
+        </div>
+        <div class="col">
+            <label for="image">Image Url</label>
+            <input type="text" class="form-control" [(ngModel)]="product.image"  placeholder="Enter Image Url"  name="image" #image="ngModel" id="stock">
+        </div>   
+        
+        <div class="col">
+            <label for="stock">Stock</label>
+            <input type="number" class="form-control" [(ngModel)]="product.stock"  placeholder="Enter Stock"  name="stock" #stock="ngModel" id="stock">
+        </div>   
+        <div class="col">
+            <label for="unit_price">Unit Price</label>
+            <input type="number" class="form-control" [(ngModel)]="product.unit_price"  placeholder="Enter Unit price"  name="unit_price" #unit_price="ngModel" id="unit_price">
+        </div>      
+          <div class="row justify-content-center mb-2">
+              <div class="col-sm-10">
+                  <button type="submit" class="btn btn-info mt-2">Add Product</button>
+              </div>
+          </div>
+        
+    </form>
+    </div>
+    <div class="col">
+        <span> Please select the categoryid from the below table</span>
+        <table class="table table-striped border">
+            <thead>
+                <th>Category Id</th>
+                <th>Category name</th>
+            </thead>
+            <tbody class="justify-content-center">
+                <tr *ngFor="let c of categories">
+                    <td> {{c.category_id}} </td>
+                    <td> {{c.name}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+  </div>

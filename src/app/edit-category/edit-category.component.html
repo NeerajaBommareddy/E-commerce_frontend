@@ -1,0 +1,28 @@
+<p>edit-category works!</p>
+<div class="container bg-success">
+
+    <h2>Update Category</h2>
+  
+    <form #newCategoryform="ngForm" (ngSubmit)="onSubmit(newCategoryform)">
+     <div class="row mb-3">
+      
+       
+        <div class="col">
+          <label for="name">Category name</label>
+          <input  type="text" class="form-control" required ngModel minlength="5" [(ngModel)]="category.name" placeholder="Category Name" name="name" #name="ngModel"  id="name">
+               
+        </div>
+        <div class="col">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" [(ngModel)]="category.description"  placeholder="Description"  name="description" #description="ngModel" id="description">
+            
+        </div>        
+      </div>
+          <div class="row justify-content-center mb-2">
+              <div class="col-sm-10">
+                  <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+          </div>
+        
+    </form>
+  </div>

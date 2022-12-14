@@ -1,0 +1,22 @@
+export class Product {
+    product_id:number;
+    code:string;
+    name:string;
+    description:string;
+    unit_price:number;
+    stock:number;
+    image:string;
+    available:boolean;
+    category_id:number;
+    constructor(product_id:number,code:string,name:string,description:string,unit_price:number,stock:number,image:string,available:boolean,category_id:number){
+        this.product_id=product_id;
+        this.code=code;
+        this.name=name;
+        this.description=description;
+        this.unit_price=unit_price;
+        this.stock=stock;
+        this.image=image;
+        this.available=available;
+        this.category_id=category_id;
+    }
+}

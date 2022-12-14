@@ -1,0 +1,42 @@
+<p>add-address works!</p>
+<div class="container bg-success">
+
+    <h2>Add Address</h2>
+
+    <form #newAddressform="ngForm" (ngSubmit)="onSubmit(newAddressform)">
+        <div class="col">
+            <label for="type">Type Of Address</label>
+            <input  type="text" class="form-control" required ngModel  [(ngModel)]="address.type" placeholder="Type of Address" name="type" #type="ngModel"  id="type">     
+          </div>
+        <div class="col">
+          <label for="address_line_one">Address line one</label>
+          <input  type="text" class="form-control" required ngModel  [(ngModel)]="address.address_line_one" placeholder="address_line_one" name="address_line_one" #address_line_one="ngModel"  id="address_line_one">     
+        </div>
+        <div class="col">
+            <label for="address_line_two">Address line two</label>
+            <input  type="text" class="form-control" required ngModel  [(ngModel)]="address.address_line_two" placeholder="address_line_two" name="address_line_two" #address_line_two="ngModel"  id="address_line_two">     
+          </div>
+          <div class="col">
+            <label for="country">Country</label>
+            <input  type="text" class="form-control" required ngModel  [(ngModel)]="address.country" placeholder="Country" name="country" #country="ngModel"  id="country">     
+          </div>
+          <div class="col">
+            <label for="city">City</label>
+            <input  type="text" class="form-control" required ngModel  [(ngModel)]="address.city" placeholder="city" name="city" #address_line_one="ngModel"  id="city">     
+          </div>
+          <div class="col">
+            <label for="state">State</label>
+            <input  type="text" class="form-control" required ngModel  [(ngModel)]="address.state" placeholder="State" name="state" #state="ngModel"  id="state">     
+          </div>
+          <div class="col">
+            <label for="pincode">Pin Code</label>
+            <input  type="text" class="form-control" required ngModel  [(ngModel)]="address.pin_code" placeholder="pin code" name="pin_code" #pin_code="ngModel"  id="pin_code">     
+          </div>          
+          <div class="row justify-content-center mb-2">
+              <div class="col-sm-10">
+                  <button type="submit" class="btn btn-info mt-2">Add Address</button>
+              </div>
+          </div>
+        
+    </form>
+</div>

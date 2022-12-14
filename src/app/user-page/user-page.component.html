@@ -1,0 +1,127 @@
+
+<div class="container-fluid" >
+    <nav class="navbar navbar navbar-expand-lg navbar-light bg-dark">
+        <span class="text-white">hi {{user.first_name}}</span>
+        
+        <ul class="navbar-nav ml-auto">
+            <div>
+            <form class="input-group w-auto" [formGroup]="formSearch" (ngSubmit)="onSearch()">
+                <input type="text" class="form-control rounded"placeholder="Search" formControlName="key" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+              </div>
+            <li class="nav-item">
+            <a class="nav-link text-white" (click)="toggleProducts()" routerLink="allProducts">All Products </a></li>
+
+            <li class="nav-item">
+             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-white nav-link">Categories</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu" *ngFor="let c of categories">
+                <li class="text-center">
+                    <a class="text-white" style="text-decoration:none ;" (click)="displayProductsbyCategory(c.category_id)" routerLink="/productbycategory">{{c.name}}</a>
+                </li>
+            </ul>   
+            
+            <li class="nav-item">
+            <a class="nav-link text-white" (click)="showCart(user.user_id)"  routerLink="cartList">Carts</a></li>
+            <li class="nav-item">
+                <a class="nav-link text-white" (click)="showOrders(user.user_id)" routerLink="Orders">View Orders</a></li>
+            <li class="nav-item">
+                <a class="nav-link text-white" (click)="showInfo()" routerLink="info">Info</a></li>
+            <li class="nav-item">
+                <a class="nav-link text-white" (click)="logOut()" routerLink="/home">LogOut</a></li>
+            
+        </ul>
+    </nav>
+</div>
+<!--
+<div class="sidebar bg-info" *ngFor="let c of categories">
+            <a href="#">{{c.name}}</a>
+</div>
+-->
+<div class="container-fluid" [hidden]= "isProducts">
+        <table class="table table-striped" >
+            <tbody id="myTable">
+                <tr *ngFor="let p of products">
+                   <td class="align-middle"> <img src={{p.image}} class="img-responsive" height="100"> </td>
+                   <td>    <h5>{{p.name}}</h5>
+                        <h6>{{p.description}}</h6>
+                    </td> 
+                   <td> <b>₹ {{p.unit_price.toFixed(2)}}</b></td>
+                   
+                   <td><a class="btn btn-primary mr-2" (click)="addToCart(p.product_id,p.unit_price)"routerLink="#">Add to cart</a> </td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+<div class="container-fluid" [hidden]= "isProductsbyCategory">
+    <table class="table table-striped" >
+       <tbody>
+            <tr *ngFor="let p of productsbyCategory">
+               <td class="align-middle"> <img src={{p.image}} class="img-responsive" height="100"> </td>
+               <td>    <h5>{{p.name}}</h5>
+                <h6>{{p.description}}</h6>
+            </td>  
+               <td><b>₹ {{p.unit_price.toFixed(2)}}</b></td>
+               <!--<td><input type="number" placeholder="enter quantity"/></td>-->
+               <td><button type="button" class="btn btn-primary mr-2"(click)="addToCart(p.product_id,p.unit_price)" routerLink="carts">Add to cart</button></td>
+            </tr>
+        </tbody>
+    
+    </table>
+</div>
+<div class="container"> 
+    <div class="row bg-dark text-white"[hidden]="isUserInfo">
+        <div class="col">
+            <h2> {{user.first_name}} {{user.last_name}} </h2>
+            <h3> {{user.email}} </h3>
+           <h4> {{user.contact_number}} </h4>
+            <button type="button" (click)="toggleEditInfo()">Edit</button>
+        </div> 
+        <div class="col">
+            <h2>Address</h2>
+            <ul *ngFor="let a of address" style="list-style: none;">
+                <li> <span class="badge badge-info"> {{a.type}} </span> </li>
+                <li>{{a.address_line_one}},{{a.address_line_two}} </li>
+                <li> {{a.city}},{{a.state}} </li>
+                <li> {{a.pin_code}},{{a.country}} </li>
+            </ul>
+            <button class="btn btn-info ml-2" (click)="addAddress()">Add Address</button>
+        </div>
+</div>
+</div>
+<div class="container" [hidden]="isEditInfo">
+    edit details
+    <form #editUserform="ngForm" (ngSubmit)="onEditInfo(editUserform)">
+        <div class="form-row mb-4">
+            <div class="col">
+              <!-- First name -->
+              <input type="text" id="FirstName" class="form-control" [(ngModel)]= "user.first_name" placeholder="First name"  name="first_name" #first_name="ngModel">
+            </div>
+            <div class="col">
+              <!-- Last name -->
+              <input type="text" id="LastName" class="form-control" placeholder="Last name" [(ngModel)]= "user.last_name" name="last_name" #last_name="ngModel">
+            </div>
+          </div>
+          <!-- Phone number -->
+          <input type="text" id="PhonePassword" class="form-control" placeholder="Phone number" [(ngModel)]= "user.contact_number" name="contact_number" #contact_number="ngModel"
+            aria-describedby="PhoneHelpBlock">
+          <!-- Newsletter -->
+          <!-- Sign up button -->
+          <button class="my-4 btn btn-success" type="submit">Update</button>  
+    </form>
+</div>
+<div class="container-fluid" [hidden]= "isProductBySearch">
+    <table class="table table-striped" >
+       <tbody>
+            <tr *ngFor="let p of productsbysearch">
+               <td class="align-middle"> <img src={{p.image}} class="img-responsive" height="100"> </td>
+               <td>    <h5>{{p.name}}</h5>
+                <h6>{{p.description}}</h6>
+            </td> 
+               <td><b>₹ {{p.unit_price.toFixed(2)}}</b></td>
+               
+               <td><button type="button" class="btn btn-primary mr-2"(click)="addToCart(p.product_id,p.unit_price)" routerLink="carts">Add to cart</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

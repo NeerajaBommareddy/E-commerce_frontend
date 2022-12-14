@@ -1,0 +1,49 @@
+<div>
+    <h3>Hi {{user.first_name}}</h3>
+    <div class="container-fluid mt-3 border-dark"  style="background-color:lightpink ; ">
+        <div class="row">
+            <div class="col" >
+                <table class="table table-striped">
+                    <thead>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                    </thead>
+                    <tbody class="h6">
+                    <tr *ngFor="let p of cartProducts">
+                        <td><b style="height:2em;">{{p.name}}</b></td>
+                        <td class="mr-0"><b> ₹ {{p.unit_price}}</b></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-3">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Quantity</th>
+                        <th>Cost</th>
+                    </thead>
+                    <tbody class="h6">
+                    <tr *ngFor="let c of carts">
+                    <td style="width:65px;">{{c.quantity}}</td>
+                    <td><b>₹ {{c.cost.toFixed(2)}} </b></td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Order Date</th>
+                        <th>Order Status</th>
+                        <th></th>
+                    </thead>
+                    <tbody class="h6">
+                    <tr *ngFor="let o of orders">
+                    <td style="width:65px;">{{o.order_date}}</td>
+                    <td><b>{{o.order_status}}</b></td>
+                    <td><button class="btn btn-danger mr-2" (click)="deleteOrder(o.order_item_id)">Cancel order</button> </td>
+                    </tbody>
+                </table>
+            </div>          
+        </div>
+        <h3><a class="btn btn-primary text-dark" (click)="toUserPage()" routerLink="user">Continue Shopping</a></h3> 
+</div>

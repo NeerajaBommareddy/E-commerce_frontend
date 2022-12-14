@@ -1,0 +1,160 @@
+
+<div class="row" [hidden]="isCarts">
+    <h3>hi {{user.first_name}}</h3>
+    <h2><strong>{{msg}}</strong></h2>
+    <h3><a class="btn btn-primary text-dark" (click)="toUserPage()" routerLink="user">{{linkToUser}}</a></h3>
+<div class="container col-6 mt-3 border-dark"  style="background-color:lightpink ; ">
+    
+    <div class="table table-striped">
+        <thead class="h4">
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th>Actions</th>
+        </thead>
+    </div>
+    <div class="row">
+        <div class="col" >
+            <table class="table table-striped">
+                <tbody class="h6">
+                <tr *ngFor="let p of cartProducts">
+                    <td  style="height:55px;"><b>{{p.name}}</b></td>
+                    <td class="mr-0"><b> ₹ {{p.unit_price}}</b></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-striped">
+                <tbody class="h6">
+                <tr *ngFor="let c of carts">
+                <td style="width:65px;">{{c.quantity}}</td>
+                <td><b>₹ {{c.cost.toFixed(2)}} </b></td>
+                <td> <button class="btn btn-primary mr-2" (click)="onEditCartClicked(c.cart_id,c.product_id)"> Edit</button> 
+                    <button class="btn btn-danger mr-2" (click)="onDeleteCartClicked(c.cart_id)"> Delete</button>  </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+        <table>
+            <tr>
+                <td><strong>Total Cost</strong></td>
+                <td><b>₹ {{total.toFixed(2)}}</b></td>
+                <td></td>
+            </tr>
+            <tr>
+
+                <td></td>
+                <td></td>
+                <td><button type="button" class="btn justify-content-center text-white" style="background-color:crimson ;" (click)="toggleShipmentInfo()">Place Order</button><td></td>
+            </tr>
+        </table>
+        </div>
+    </div>
+    
+</div>
+
+<div class="container col-3" style="background-color:cyan ;" [hidden]="isEditCart">
+    <h2>Edit Cart</h2>
+
+  
+    <form #newCartform="ngForm" (ngSubmit)="onEdit(newCartform)">
+     <div class="col mb-3">
+        <div class="row">
+          <label for="product_id"> Product id</label>
+          <input  type="number" class="form-control" readonly="readonly" required ngModel minlength="5" [(ngModel)]="cart.product_id" placeholder="product_id" name="product_id" #product_id="ngModel"  id="product_id">   
+        </div>
+        <div class="row">
+            <label for="quantity"> quantity</label>
+            <input  type="number" class="form-control" required ngModel  [(ngModel)]="cart.quantity" placeholder="Quantity" name="quantity" #quantity="ngModel"  id="quantity">   
+        </div>
+        <div class="row">
+            <label for="cost">Cost</label>
+            <input  type="number" class="form-control" required readonly="readonly" ngModel  [(ngModel)]="cart.cost" placeholder="cost" name="cost" #cost="ngModel"  id="cost">   
+        </div>
+        <div class="row justify-content-center mb-2 mt-2">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+     </div>
+    </form>
+    </div>
+</div>
+<div class="col col-md-4 border border-dark pb-5 mt-3 ml-5" [hidden]="isShipment">
+    <form #newShipmentform="ngForm" (ngSubmit)="placeOrder(newShipmentform)">
+        
+             <label for="shipment_address">Shipment Address</label>
+             <input  type="text" class="form-control" required ngModel minlength="5" [(ngModel)]="order_item.shipment_address" placeholder="Enter Shipment Address" name="shipment_address" #shipment_address="ngModel"  id="shipment_address">
+             <strong>Mode of Payment</strong> <br>
+
+            <input type="radio" id="poD" name="modeofpayment" value="Pay On Delivery">
+               <label for="poD">Pay On Delivery</label><br>
+                <input type="radio" id="Card" name="modeofpayment" value="Pay through Card">
+                <label for="card">pay Via Card</label><br>
+                <input type="radio" id="UPI" name="modeofpayment" value="UPI">
+                <label for="Upi"><input type="text" placeholder="Enter UPI"></label><br>
+            <button type="submit">Place Order</button>
+    </form>
+</div>
+<div class="container bg-info align-middle mt-5" [hidden]="isBill">
+    <div class="row">
+        <div class="col">
+        <h3 class="text_success"> Your Order Is Confirmed</h3>
+        </div>
+        <div class="col">
+            <h3>Order Date : {{order_item.order_date}}</h3>
+        </div>
+    </div>
+        <div class="col">
+                <tr>{{user.first_name}}</tr>
+                <tr><span>Track Your order via</span>{{user.email}}</tr>
+                <tr>{{user.contact_number}}<tr>
+        </div>
+        <div class="col">
+            <th>Shipment Address</th>
+            <tr>{{order_item.shipment_address}}</tr>
+    </div>
+        <div class="row">
+            <div class="col" >
+                <table class="table">
+                    <tbody class="h6">
+                    <tr *ngFor="let p of cartProducts">
+                        <td ><b>{{p.name}}</b></td>
+                        <td ><b> ₹ {{p.unit_price}}</b></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <table class="table ml-3">
+                    <tbody class="h6">
+                    <tr *ngFor="let c of carts" style="padding-left: 60%;">
+                    <td style="width:65px;" class="col">{{c.quantity}}</td>
+                    <td><b class="col col-sm-6">₹ {{c.cost.toFixed(2)}} </b></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>        
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+            <table>
+                <tr>
+                    <td><span><strong class="mr-4">Total Cost</strong></span></td>
+                    <td><b>₹ {{total.toFixed(2)}}</b></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <h3><a class="btn btn-primary text-dark" (click)="toUserPage()" routerLink="user">Continue Shopping</a></h3>                   
+                </tr>
+            </table>
+            </div>
+        </div>
+</div>

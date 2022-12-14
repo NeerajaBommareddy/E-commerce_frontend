@@ -1,0 +1,23 @@
+export class Address {
+    address_id:number;
+    user_id:number;
+    address_line_one:string;
+    address_line_two:string;
+    city:string;
+    state:string;
+    country:string;
+    pin_code:string;
+    type:string;
+    constructor(address_id:number,user_id:number,address_line_one:string,address_line_two:string,city:string,
+        state:string,country:string,pin_code:string,type:string){
+        this.address_id=address_id;
+        this.user_id=user_id;
+        this.address_line_one=address_line_one;
+        this.address_line_two=address_line_two;
+        this.city=city;
+        this.state=state;
+        this.country=country;
+        this.pin_code=pin_code;
+        this.type=type; 
+    }
+}

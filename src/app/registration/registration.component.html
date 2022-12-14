@@ -1,0 +1,45 @@
+
+<!-- Default form register -->
+<div class="container col-md-6 mt-3">
+<form class="text-center border border-dark bg-info p-5" #newRegisterform="ngForm" (ngSubmit)="onSubmit(newRegisterform)">
+    <p class="h4 mb-4">Sign up</p>
+    <div class="form-row mb-4">
+      <div class="col">
+        <!-- First name -->
+        <input type="text" id="FirstName" class="form-control" [(ngModel)]= "user.first_name" placeholder="First name"  name="first_name" #firstName="ngModel">
+      </div>
+      <div class="col">
+        <!-- Last name -->
+        <input type="text" id="LastName" class="form-control" placeholder="Last name" [(ngModel)]= "user.last_name" name="last_name" #firstName="ngModel">
+      </div>
+    </div>
+    <!-- E-mail -->
+    <input type="email" id="Email" class="form-control mb-4" placeholder="E-mail" [(ngModel)]= "user.email" name="email" #firstName="ngModel">
+   
+    
+    <!-- Password -->
+    <input type="password" id="Password" class="form-control" placeholder="Password" [(ngModel)]= "user.password" name="password" #firstName="ngModel"
+          aria-describedby="PasswordHelpBlock">
+    <small id="PasswordHelpBlock" class="form-text text-muted mb-4">
+      At least 8 characters and 1 digit
+    </small>
+    <!-- Phone number -->
+    <input type="text" id="PhonePassword" class="form-control" placeholder="Phone number" [(ngModel)]= "user.contact_number" name="contact_number" #firstName="ngModel"
+      aria-describedby="PhoneHelpBlock">
+    <small id="PhoneHelpBlock" class="form-text text-muted mb-4">
+      Optional - for two-step authentication
+    </small>
+    <!-- Newsletter -->
+    <!-- Sign up button -->
+    <button class="my-4 btn btn-success" type="submit">Sign up</button>
+    
+    <!-- Terms of service -->
+    <p>By clicking
+      <em>Sign in</em> you agree to our
+      <a href="" target="_blank">terms of service</a>
+    </p>
+    <p>Already have an Account?<a routerLink="/login">Login</a></p>
+  </form>
+  <!-- Default form register -->
+  
+</div>
